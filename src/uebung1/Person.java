@@ -74,16 +74,7 @@ public class Person {
         }
         return alter;
 
-        public void gueltigesDatum() {
 
-        [0]  = 28;
-        int[1]  = 30;
-        int[2]  = 31;
-
-        if()
-
-
-        }
 
     }
 }
