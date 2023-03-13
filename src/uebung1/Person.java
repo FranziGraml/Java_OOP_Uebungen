@@ -1,5 +1,7 @@
 package uebung1;
 
+import java.util.Arrays;
+
 public class Person {
 
     //Eigenschaften |Attribute
@@ -62,6 +64,7 @@ public class Person {
     }
 
     public static int berechneAlter(int tag, int monat, int jahr) {
+        gueltigesDatum(tag, monat);
         int alter = 0;
         int aktuellerTag = 13;
         int aktuellerMonat = 3;
@@ -73,9 +76,43 @@ public class Person {
             alter -= 1;
         }
         return alter;
-
-
-
     }
+
+    public static void gueltigesDatum(int tag, int monat) {
+        int[] thirtyDays = {4, 6, 9, 11};
+        Integer[] thirtyOneDays = {1, 3, 5, 7, 8, 10, 12};
+        boolean thirtyDaysContainsMonth = isInArray(thirtyDays, monat);
+        boolean thirtyOneDaysContainsMonth = Arrays.asList(thirtyOneDays).contains(monat);
+        boolean isFebruary = (monat == 2);
+        System.out.println(thirtyOneDaysContainsMonth);
+        if (monat < 1 || monat > 12) {   // Monate sollen zwischen 1 && 12 liegen
+            throw new IllegalArgumentException("Monatsangabe ungültig");
+        }
+        if (thirtyDaysContainsMonth && (tag < 1 || tag > 30)) {
+            throw new IllegalArgumentException("Datumseingabe ungültig");
+        }
+        if (thirtyOneDaysContainsMonth && (tag < 1 || tag > 31)) {
+            throw new IllegalArgumentException("Datumseingabe ungültig");
+        }
+        if (isFebruary && (tag < 1 || tag > 28)) {
+            throw new IllegalArgumentException("Datumseingabe ungültig");
+        }
+    }
+
+    public static boolean isInArray(int[] arr, int zahl) {
+        for(int element : arr) {
+            if(element == zahl) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
+
+
+
+
+
+
 
