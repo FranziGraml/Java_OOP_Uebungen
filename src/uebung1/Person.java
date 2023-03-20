@@ -6,7 +6,7 @@ public class Person {
 
     //Eigenschaften |Attribute
 
-    private String vorname;
+    private final String vorname;
     private String nachname;
     private int geburtstag;
     private int geburtsmonat;
@@ -21,8 +21,7 @@ public class Person {
 
 
     public Person(String vorname, String nachname, int geburtstag, int geburtsmonat, int geburtsjahr) {
-        this.vorname = vorname;
-        this.nachname = nachname;
+        this(vorname, nachname);
         this.geburtstag = geburtstag;
         this.geburtsmonat = geburtsmonat;
         this.geburtsjahr = geburtsjahr;
@@ -63,22 +62,20 @@ public class Person {
         return geburtsjahr;
     }
 
-    public static int berechneAlter(int tag, int monat, int jahr) {
-        gueltigesDatum(tag, monat);
+    public int berechneAlter(int aktuellerTag, int aktuellerMonat, int aktuellesJahr) {
+        gueltigesDatum2(aktuellerTag, aktuellerMonat, aktuellesJahr);
         int alter = 0;
-        int aktuellerTag = 13;
-        int aktuellerMonat = 3;
-        int aktuellesJahr = 2023;
-        alter = aktuellesJahr - jahr;
-        if (aktuellerMonat < monat) {
+        alter = aktuellesJahr - this.geburtsjahr;
+        if (aktuellerMonat < this.geburtsmonat) {
             alter -= 1;
-        } else if (aktuellerMonat == monat && aktuellerTag < tag) {
+        } else if (aktuellerMonat == this.geburtsmonat && aktuellerTag < this.geburtstag) {
             alter -= 1;
         }
         return alter;
     }
 
-    public static void gueltigesDatum(int tag, int monat) {
+
+    /*public static void gueltigesDatum(int tag, int monat) {
         int[] thirtyDays = {4, 6, 9, 11};
         Integer[] thirtyOneDays = {1, 3, 5, 7, 8, 10, 12};
         boolean thirtyDaysContainsMonth = isInArray(thirtyDays, monat);
@@ -100,15 +97,54 @@ public class Person {
     }
 
     public static boolean isInArray(int[] arr, int zahl) {
-        for(int element : arr) {
-            if(element == zahl) {
+        for (int element : arr) {
+            if (element == zahl) {
                 return true;
             }
         }
         return false;
+    }*/
+
+    public static boolean schaltJahr(int jahr) {
+        if (((jahr % 4 == 0) && (jahr % 100 != 0)) || (jahr % 400 == 0))
+            return true;
+        else
+            return false;
+
     }
 
-}
+
+        public static boolean gueltigesDatum2(int tag, int monat, int jahr){
+            if (monat < 1 || monat > 12 || tag < 1 || tag > 31) {
+                return false;
+            }
+
+            switch (monat) {
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    if (tag <= 30) {
+                        return true;
+                    }
+                    break;
+                case 2:
+                    if (tag <= 28) {
+                        return true;
+                    }
+                    if (tag >= 29) {
+                        schaltJahr(jahr);
+                    } return true;
+
+
+
+            }
+
+
+            return true;
+        }
+    }
+
 
 
 
