@@ -134,9 +134,7 @@ public class Person {
                     }
                     if (tag >= 29) {
                         schaltJahr(jahr);
-                    } return true;
-
-
+                    } return false;
 
             }
 
