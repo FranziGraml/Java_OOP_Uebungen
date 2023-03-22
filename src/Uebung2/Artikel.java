@@ -1,5 +1,9 @@
 package Uebung2;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
+import java.util.Scanner;
+
 public class Artikel {
     private String name;
     private double preis;
